@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:diamond_dial_fab/diamond_dial_fab.dart';
 
 void main() {
   runApp(const MyApp());
@@ -105,10 +106,11 @@ class _MyHomePageState extends State<MyHomePage> {
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: const Icon(Icons.add),
+      floatingActionButton: DiamondDialFab(
+        mainIcon: Icons.ac_unit,
+        children: [
+          FloatingActionButton(onPressed: (){})
+        ],
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );
   }
