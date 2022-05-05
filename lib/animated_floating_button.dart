@@ -1,3 +1,4 @@
+import 'package:diamond_dial_fab/diamond_border.dart';
 import 'package:flutter/material.dart';
 
 class AnimatedFloatingButton extends StatefulWidget {
@@ -80,9 +81,7 @@ class _AnimatedFloatingButtonState extends State<AnimatedFloatingButton>
         : AnimatedSize(
       duration: const Duration(milliseconds: 150),
       curve: widget.curve,
-      child: Container(
-        child: widget.dialRoot,
-      ),
+      child: widget.dialRoot,
     );
   }
 }

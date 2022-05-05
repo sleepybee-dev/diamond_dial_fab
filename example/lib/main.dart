@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:diamond_dial_fab/diamond_dial_fab.dart';
+import 'package:diamond_dial_fab/diamond_dial_fab_child.dart';
 
 void main() {
   runApp(const MyApp());
@@ -10,9 +11,9 @@ class MyApp extends StatelessWidget {
 
   // This widget is the root of your application.
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext cokntext) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Diamond FAB',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -25,7 +26,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Diamond Dial FAB Demo'),
     );
   }
 }
@@ -49,18 +50,10 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
+  FloatingActionButtonLocation _fabLocation = FloatingActionButtonLocation.centerFloat;
+  LabelLocation _labelLocation = LabelLocation.left;
+  double _cornerRadius = 2.0;
+  DimOverlay _dimOverlay = DimOverlay.none;
 
   @override
   Widget build(BuildContext context) {
@@ -70,46 +63,164 @@ class _MyHomePageState extends State<MyHomePage> {
     // The Flutter framework has been optimized to make rerunning build methods
     // fast, so that you can just rebuild anything that needs updating rather
     // than having to individually change instances of widgets.
+
     return Scaffold(
       appBar: AppBar(
         // Here we take the value from the MyHomePage object that was created by
         // the App.build method, and use it to set our appbar title.
         title: Text(widget.title),
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            const Text(
-              'You have pushed the button this many times:',
+            Text('Diamond Corner Radius ${_cornerRadius.round()}'),
+            Slider(
+              label: '${_cornerRadius.round()}',
+              value: _cornerRadius,
+              min: 0,
+              max: 30,
+              onChanged: (value) {
+                  setState(() {
+                      _cornerRadius = value;
+                    });
+            }),
+            const Text('Fab Location'),
+            Row(
+              children: [
+                Expanded(
+                  child: RadioListTile(
+                    title : const Text('Left'),
+                    value: FloatingActionButtonLocation.startFloat,
+                    groupValue: _fabLocation,
+                    onChanged: (value) {
+                      setState(() {
+                        _fabLocation = value as FloatingActionButtonLocation;
+                      });
+                    },
+                  ),
+                ),
+                Expanded(
+                  child: RadioListTile(
+                    title : const Text('Center'),
+                    value: FloatingActionButtonLocation.centerFloat,
+                    groupValue: _fabLocation,
+                    onChanged: (value) {
+                      setState(() {
+                        _fabLocation = value as FloatingActionButtonLocation;
+                      });
+                    },
+                  ),
+                ),
+                Expanded(
+                  child: RadioListTile(
+                    title : const Text('Right'),
+                    value: FloatingActionButtonLocation.endFloat,
+                    groupValue: _fabLocation,
+                    onChanged: (value) {
+                      setState(() {
+                        _fabLocation = value as FloatingActionButtonLocation;
+                      });
+                    },
+                  ),
+                ),
+              ],
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            const Text('Label Location'),
+            Row(
+              children: [
+                Expanded(
+                  child: RadioListTile(
+                    title : const Text('Left'),
+                    value: LabelLocation.left,
+                    groupValue: _labelLocation,
+                    onChanged: (value) {
+                      setState(() {
+                        _labelLocation = value as LabelLocation;
+                      });
+                    },
+                  ),
+                ),
+                Expanded(
+                  child: RadioListTile(
+                    title : const Text('Right'),
+                    value: LabelLocation.right,
+                    groupValue: _labelLocation,
+                    onChanged: (value) {
+                      setState(() {
+                        _labelLocation = value as LabelLocation;
+                      });
+                    },
+                  ),
+                ),
+              ],
+            ),
+            const Text('Dim Overlay'),
+            Row(
+              children: [
+                Expanded(
+                  child: RadioListTile(
+                    title : const Text('None'),
+                    value: DimOverlay.none,
+                    groupValue: _dimOverlay,
+                    onChanged: (value) {
+                      setState(() {
+                        _dimOverlay = value as DimOverlay;
+                      });
+                    },
+                  ),
+                ),
+                Expanded(
+                  child: RadioListTile(
+                    title : const Text('Dark'),
+                    value: DimOverlay.dark,
+                    groupValue: _dimOverlay,
+                    onChanged: (value) {
+                      setState(() {
+                        _dimOverlay = value as DimOverlay;
+                      });
+                    },
+                  ),
+                ),
+                Expanded(
+                  child: RadioListTile(
+                    title : const Text('Light'),
+                    value: DimOverlay.light,
+                    groupValue: _dimOverlay,
+                    onChanged: (value) {
+                      setState(() {
+                        _dimOverlay = value as DimOverlay;
+                      });
+                    },
+                  ),
+                ),
+              ],
             ),
           ],
         ),
       ),
+      floatingActionButtonLocation: _fabLocation,
       floatingActionButton: DiamondDialFab(
-        mainIcon: Icons.ac_unit,
+        cornerRadius: _cornerRadius,
+        childLabelLocation: _labelLocation,
+        dimOverlay: _dimOverlay,
+        dimOpacity: 0.5,
+        mainIcon: const Icon(Icons.account_balance_sharp),
+        pressedIcon: const Icon(Icons.close),
+        pressedBackgroundColor: Colors.white,
+        pressedForegroudColor: Colors.amber,
+        mainBackgroundColor: Colors.amber,
         children: [
-          FloatingActionButton(onPressed: (){})
+          DiamondDialChild(
+            child: const Icon(Icons.wine_bar),
+            label: "Wine Bar",
+          ),
+          DiamondDialChild(
+              child: const Icon(Icons.wc),
+              label: "Toilet"
+          ),
         ],
       ), // This trailing comma makes auto-formatting nicer for build methods.
     );

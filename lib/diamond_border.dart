@@ -2,10 +2,13 @@ import 'package:flutter/material.dart';
 
 class DiamondBorder extends ShapeBorder {
 
-  const DiamondBorder();
+  final double cornerRadius;
+
+  const DiamondBorder({
+    this.cornerRadius = 2.0
+  });
 
   @override
-  // TODO: implement dimensions
   EdgeInsetsGeometry get dimensions => const EdgeInsets.only();
 
   @override
@@ -15,16 +18,15 @@ class DiamondBorder extends ShapeBorder {
 
   @override
   Path getOuterPath(Rect rect, {TextDirection? textDirection}) {
-    int round = 8;
-    // TODO: implement getOuterPath
+    double round = cornerRadius;
     return Path()
-      ..moveTo(rect.left + rect.width / 2.0 - round, rect.top + round) //상
+      ..moveTo(rect.left + rect.width / 2.0 - round, rect.top + round) // Top
       ..quadraticBezierTo(rect.left + rect.width / 2.0, rect.top, rect.left + rect.width / 2.0 + round,  rect.top + round)
-      ..lineTo(rect.right - round, rect.top + rect.height / 2.0 - round) //우
+      ..lineTo(rect.right - round, rect.top + rect.height / 2.0 - round) // Right
       ..quadraticBezierTo(rect.right,  rect.top + rect.height / 2.0, rect.right - round,  rect.top + rect.height / 2.0 + round)
-      ..lineTo(rect.left + rect.width  / 2.0 + round, rect.bottom - round) // 하
+      ..lineTo(rect.left + rect.width  / 2.0 + round, rect.bottom - round) // Bottom
       ..quadraticBezierTo(rect.left + rect.width  / 2.0,  rect.bottom, rect.left + rect.width / 2.0 - round, rect.bottom - round)
-      ..lineTo(rect.left + round, rect.top + rect.height / 2.0 + round)
+      ..lineTo(rect.left + round, rect.top + rect.height / 2.0 + round) // Left
       ..quadraticBezierTo(rect.left, rect.top + rect.height / 2.0, rect.left + round, rect.top + rect.height / 2.0 - round)
       ..close();
   }
