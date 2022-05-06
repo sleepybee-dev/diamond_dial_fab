@@ -2,7 +2,7 @@
 Diamond shaped floating action button with dials. 
 
 ## Screenshot
-![screenshot](https://user-images.githubusercontent.com/88768221/166952843-b69a6dfa-95b2-4cd8-8b8c-2859a8b97a6d.gif)
+<img src = "https://user-images.githubusercontent.com/88768221/166952843-b69a6dfa-95b2-4cd8-8b8c-2859a8b97a6d.gif" width="320" height="640">
 
 ## Usage
 - Add the dependency to your pubspec.yaml file.
