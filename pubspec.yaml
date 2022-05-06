@@ -1,8 +1,7 @@
 name: diamond_dial_fab
 description: diamond shaped floating action button
 version: 0.0.1
-author: sleepybee
-homepage:
+homepage: https://github.com/sleepybee-dev/diamond_dial_fab
 
 environment:
   sdk: ">=2.15.1 <3.0.0"
