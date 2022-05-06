@@ -16,7 +16,8 @@ class DiamondDialFab extends StatefulWidget {
 
   final List<DiamondDialChild> children;
 
-  /// <mainIcon> The icon of the main floating button.
+  final double buttonSize;
+
   final Icon mainIcon;
   final Icon? pressedIcon;
 
@@ -24,18 +25,14 @@ class DiamondDialFab extends StatefulWidget {
   final Color? pressedBackgroundColor;
 
   final Color? mainForegroundColor;
-  final Color? pressedForegroudColor;
+  final Color? pressedForegroundColor;
 
-  final Color? childBackgroundColor;
-  final Color? childTextColor;
-  final Color? childTextBackgroundColor;
   final LabelLocation? childLabelLocation;
   final double? cornerRadius;
   final DimOverlay dimOverlay;
   final double? dimOpacity;
   final int animationSpeed;
 
-  final double buttonSize;
   final Size childrenButtonSize;
 
   final ValueNotifier<bool>? notifierIsOpen;
@@ -48,24 +45,21 @@ class DiamondDialFab extends StatefulWidget {
   DiamondDialFab(
       {Key? key,
         required this.children,
+        this.buttonSize = 64.0,
         this.mainIcon = const Icon(Icons.add),
-        this.pressedIcon,
         this.mainBackgroundColor,
-        this.pressedBackgroundColor,
         this.mainForegroundColor,
-        this.pressedForegroudColor,
-        this.childBackgroundColor,
-        this.childTextColor,
-        this.childTextBackgroundColor,
+        this.pressedIcon,
+        this.pressedBackgroundColor,
+        this.pressedForegroundColor,
         this.childLabelLocation,
         this.cornerRadius = 2.0,
         this.dimOverlay = DimOverlay.none,
         this.dimOpacity = 0.7,
         this.childrenButtonSize = const Size(56.0, 56.0),
-        this.animationSpeed = 1000,
         this.notifierIsOpen,
         this.heroTag,
-        this.buttonSize = 64.0}) : super(key: key);
+        this.animationSpeed = 1000,}) : super(key: key);
 
 
   @override
@@ -224,8 +218,8 @@ class _DiamondDialFabState extends State<DiamondDialFab> with SingleTickerProvid
         if (widget.pressedBackgroundColor != null) {
           _curBackgroundColor = _isOpen ? widget.pressedBackgroundColor : widget.mainBackgroundColor;
         }
-        if (widget.pressedForegroudColor != null) {
-          _curForegroundColor = _isOpen ? widget.pressedForegroudColor : widget.mainForegroundColor;
+        if (widget.pressedForegroundColor != null) {
+          _curForegroundColor = _isOpen ? widget.pressedForegroundColor : widget.mainForegroundColor;
         }
       });
     }
@@ -317,7 +311,7 @@ class _ChildrenOverlayState extends State<_ChildrenOverlay> {
                   padding: EdgeInsets.symmetric(
                     horizontal: max(widget.widget.buttonSize - 56, 0) / 2,
                   ),
-                  child: _buildChildColumn(
+                  child: _buildChildrenColumn(
                     crossAxisAlignment: widget.widget.childLabelLocation == LabelLocation.left
                         ? CrossAxisAlignment.start
                         : CrossAxisAlignment.end,
@@ -333,7 +327,7 @@ class _ChildrenOverlayState extends State<_ChildrenOverlay> {
 
 }
 
-Widget _buildChildColumn(
+Widget _buildChildrenColumn(
     {CrossAxisAlignment? crossAxisAlignment,
       MainAxisAlignment? mainAxisAlignment,
       required List<Widget> children,
